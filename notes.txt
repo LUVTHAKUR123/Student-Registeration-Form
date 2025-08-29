@@ -1,0 +1,286 @@
+ const [isAuth, setIsAuth] = useState(false);
+
+ useEffect(() => {
+  const storedAuth = JSON.parse(localStorage.getItem("isAuthenticated"));
+  if (storedAuth) {
+    setIsAuth(true);
+  }
+}, []);
+
+
+  const login = () => {
+    localStorage.setItem("isAuthenticated", JSON.stringify(true));
+    setIsAuth(true);
+  };
+
+  const logout = () => {
+    localStorage.setItem("isAuthenticated", JSON.stringify(false));
+    setIsAuth(false);
+  };
+
+  //====================
+  import React, { useState } from "react";
+
+function MultipleCheckboxForm() {
+  // State holds an array of selected options
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const handleChange = (event) => {
+    const { name, checked } = event.target;
+
+    setSelectedOptions((prevSelected) => {
+      if (checked) {
+        // Add the option if checked and not already in array
+        const newSelected = [...prevSelected, name];
+        console.log("Selected options:", newSelected);
+        return newSelected;
+      } else {
+        // Remove the option if unchecked
+        const newSelected = prevSelected.filter((option) => option !== name);
+        console.log("Selected options:", newSelected);
+        return newSelected;
+      }
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Submitted selected options:", selectedOptions);
+    alert(
+      `Submitted selected options: ${
+        selectedOptions.length ? selectedOptions.join(", ") : "None"
+      }`
+    );
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        <input
+          type="checkbox"
+          name="optionA"
+          checked={selectedOptions.includes("optionA")}
+          onChange={handleChange}
+        />
+        Option A
+      </label>
+      <br />
+      <label>
+        <input
+          type="checkbox"
+          name="optionB"
+          checked={selectedOptions.includes("optionB")}
+          onChange={handleChange}
+        />
+        Option B
+      </label>
+      <br />
+      <label>
+        <input
+          type="checkbox"
+          name="optionC"
+          checked={selectedOptions.includes("optionC")}
+          onChange={handleChange}
+        />
+        Option C
+      </label>
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default MultipleCheckboxForm;
+
+
+
+//student form
+import React, { useState } from "react";
+import useEntryForm from "../hooks/useEntryForm";
+
+function StudentForm() {
+
+    // Custom hook to manage student form state
+    const { errors, validate, setErrors, students, setStudents, handleInputChange } = useEntryForm();
+
+
+    // Form submission handler
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        if (validate()) {
+            console.log("Submitted student:", students);
+            // Clear the form
+            setStudents({
+                name: "",
+                email: "",
+                contact: "",
+                course: "",
+                // department: ""
+            });
+
+            setErrors({});
+        }
+    };
+
+    return (
+        <div>
+
+            <form onSubmit={handleFormSubmit}>
+                <h1 className="main-header"> Student Registeration form</h1>
+                <label>Student Name:</label>
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter the student name"
+                    value={students.name}
+                    onChange={handleInputChange}
+                />
+                {errors.name && <p style={{
+                    color: "red"
+                    , fontFamily: "cursive"
+                }}>{errors.name}</p>}
+                <br />
+
+                <label>Email:</label>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter the email"
+                    value={students.email}
+                    onChange={handleInputChange}
+                />
+                {errors.email && <p style={{ color: "red", fontFamily: "cursive" }}>{errors.email}</p>}
+                <br />
+
+                <label>Contact:</label>
+                <input
+                    type="tel"
+                    name="contact"
+                    placeholder="Enter the contact number"
+                    value={students.contact}
+                    onChange={handleInputChange}
+                />
+                {errors.contact && <p style={{ color: "red", fontFamily: "cursive" }}>{errors.contact}</p>}
+                <br />
+
+                <label>Course:</label>
+                <select
+                    className="course-select"
+                    name="course"
+                    value={students.course}
+                    onChange={handleInputChange}
+                >
+                    <option value="">-- Select course --</option>
+                    <option value="BCA">BCA</option>
+                    <option value="BBA">BBA</option>
+                    <option value="BA">BA</option>
+                </select>
+                {errors.course && <p style={{ color: "red", fontFamily: "cursive" }}>{errors.course}</p>}
+                <br />
+                {/* <label>Department :</label>
+
+                <div className="checkbox-group">
+                    <label className="checkbox-item">
+                        <input
+                            type="checkbox"
+                            name="department"
+                            value="IT"
+                            checked={students.department.includes("IT")}
+                            onChange={handleInputChange}
+                        />
+                        <span>IT</span>
+                    </label>
+
+                    <label className="checkbox-item">
+                        <input
+                            type="checkbox"
+                            name="department"
+                            value="Finance"
+                            checked={students.department.includes("Finance")}
+                            onChange={handleInputChange}
+                        />
+                        <span>Finance</span>
+                    </label>
+                </div> */}
+
+                <br />
+
+                <br />
+                <button className="sumit-btn" type="submit">Submit</button>
+            </form>
+        </div>
+    );
+}
+
+export default StudentForm;
+
+
+///===========
+import { useState } from "react";
+
+function useEntryForm() {
+    // State to manage form errors and student data
+    const [errors, setErrors] = useState({});
+    const [students, setStudents] = useState({
+        name: "",
+        email: "",
+        contact: "",
+        course: "",
+        // department: [],  // array of selected departments
+    });
+
+    //handle for input change in the form
+    const handleInputChange = (e) => {
+        const { name, value, type, checked } = e.target;
+
+        // if (name === "department") {
+        //     // Handle checkbox array
+        //     setStudents((prev) => {
+        //         const newDepartments = checked
+        //             ? [...prev.department, value]  // add value if checked
+        //             : prev.department.filter((dept) => dept !== value); // remove if unchecked
+
+        //         return { ...prev, department: newDepartments };
+        //     });
+        // } else {
+        // Handle normal inputs/selects
+        setStudents((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+        // }
+    };
+
+
+    // Validation function
+    const validate = () => {
+        const newErrors = {};
+
+        if (!students.name) {
+            newErrors.name = "Name is required";
+        } else if (students.name.length < 3 || students.name.length > 10) {
+            newErrors.name = "Name must be between 3 and 10 characters";
+        }
+
+        if (!students.email) {
+            newErrors.email = "Email is required";
+        } else if (!/\S+@\S+\.\S+/.test(students.email)) {
+            newErrors.email = "Email is invalid";
+        }
+        if (!students.contact) {
+            newErrors.contact = "Contact is required";
+        } else if (!/^\d{10}$/.test(students.contact)) {
+            newErrors.contact = "Contact must be 10 digits";
+        }
+        if (!students.course) {
+            newErrors.course = "Course is required";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    return { students, setStudents, handleInputChange, errors, setErrors, validate };
+}
+
+export default useEntryForm;

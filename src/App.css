@@ -1,0 +1,38 @@
+/* Container for checkbox + label text */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* space between checkboxes */
+  margin-top: 8px;
+}
+
+/* Individual checkbox + text wrapper */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* space between checkbox and text */
+  font-weight: 500;
+  font-size: 1rem;
+  color: #34495e;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Checkbox input style */
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #3498db; /* blue accent */
+  transition: accent-color 0.3s ease;
+}
+
+/* Checkbox label text */
+.checkbox-item span {
+  user-select: none;
+}
+
+/* Optional: change accent color on hover */
+.checkbox-item:hover input[type="checkbox"] {
+  accent-color: #2980b9;
+}

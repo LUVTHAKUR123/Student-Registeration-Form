@@ -1,0 +1,33 @@
+/* Full page home container */
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80")
+      no-repeat center center/cover;
+  color: white;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Title style */
+.home-title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Paragraph text */
+.home-text {
+  max-width: 600px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+}
