@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import InputField from "../ControllerFields/inputField";
+import InputField from "../ControllerFields/InputField";
 import SelectorFields from "../ControllerFields/SelectorFields";
 import CheckboxesField from "../ControllerFields/CheckboxesField";
 import { yupResolver } from "@hookform/resolvers/yup";
