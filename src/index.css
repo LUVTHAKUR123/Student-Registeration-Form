@@ -192,7 +192,7 @@ h1.error-Header {
 /* Form */
 form {
   /* width: 100%; */
-  width: 500px;
+  /* width: 500px; */
   margin: 50px auto 0;
   background: white;
   border-radius: 16px;
@@ -225,6 +225,14 @@ textarea {
   font-size: 1rem;
   color: #2c3e50;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.checkboxes {
+  display: flex;
+  gap: 8px;
+}
+.gender {
+  display: flex;
+  gap: 10px;
 }
 /* select fields */
 select {
@@ -323,6 +331,23 @@ h1.main-header {
   outline: none;
   display: inline-block;
 }
+.close-btn {
+  background-color: #cd1a1a;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  user-select: none;
+  outline-offset: 2px;
+  outline: none;
+  display: math;
+  margin: 15px 20px 21px 23px;
+}
 
 .sumit-btn:hover,
 .sumit-btn:focus {
@@ -360,6 +385,120 @@ h1.main-header {
 
 /* error message styling */
 span {
-  color: red;
+  /* color: red; */
   font-family: cursive;
+}
+
+/* css for the table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  margin-top: 20px;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.2s;
+}
+
+/* adding the css for the modal */
+.student-data-container {
+  width: 95%;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.add-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #45a049;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.student-table th,
+.student-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.student-table th {
+  background-color: #f2f2f2;
+}
+
+.actions button {
+  margin: 2px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #2196f3;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #0b7dda;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #da190b;
+}
+
+/* modal css */
+.modal-content {
+  border: 2px solid black;
+  width: 100%;
+  align-items: center;
+  margin: 0 auto;
+  box-shadow: 0px -1px 12px 8px #b7b7b7;
+  border: none;
+  margin-bottom: 45px;
+  border-radius: 15px;
 }

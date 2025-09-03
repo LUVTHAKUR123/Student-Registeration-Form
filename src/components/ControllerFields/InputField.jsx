@@ -1,6 +1,6 @@
 import React from "react";
 import { Controller } from "react-hook-form";
-
+import { TextField, InputLabel, FormHelperText } from "@mui/material";
 function InputField({
     name,
     control,
@@ -13,7 +13,7 @@ function InputField({
     return (
         <>
             <div>
-                {label && <label htmlFor={name}>{label}</label>}
+                {/* {label && <label htmlFor={name}>{label}</label>} */}
 
                 <Controller
                     name={name}
@@ -22,15 +22,31 @@ function InputField({
                     // rules={rules}
                     render={({ field, fieldState: { error } }) => (
                         <div>
-                            <input
+                            <InputLabel
+                                htmlFor={name}
+                                sx={{ fontSize: "15px", fontFamily: "sans-serif" }}
+                            >
+                                {label}
+                            </InputLabel>
+
+                            {/* <input */}
+                            <TextField
                                 {...field}
                                 id={name}
+                                // label={label}
+                                variant="outlined"
                                 placeholder={placeholder}
                                 type={type}
+                                fullWidth
+                                margin="dense"
                             />
                             <br />
 
-                            {error && <span>{error.message}</span>}
+                            {error && (
+                                <FormHelperText style={{ fontSize: "15px", color: "#d32f2f" }}>
+                                    {error.message}
+                                </FormHelperText>
+                            )}
                         </div>
                     )}
                 />

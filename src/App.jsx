@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Form from "./components/Form/Form";
 import Home from "./pages/Home";
@@ -15,6 +15,7 @@ import StudentForm from "./features/Students/StudentForm";
 import Student from "./features/Students/student";
 import UserForm from "./features/Users/UserForm";
 import ControllerForm from "./components/Form/ControllerForm";
+import StudentData from "./components/Form/StudentData"
 localStorage.setItem("isAuthenticated", "true");
 localStorage.setItem("isAuthenticated", "false");
 const authStatus = localStorage.getItem("isAuthenticated") === "true";
@@ -68,6 +69,7 @@ function App() {
         <Route path="/student" element={<Student />} />
         <Route path="/userform" element={<UserForm />} />
         <Route path="/controllerForm" element={<ControllerForm />} />
+        <Route path="/studentData" element={<StudentData />} />
       </Routes>
     </BrowserRouter>
   );
