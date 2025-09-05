@@ -63,7 +63,7 @@
 import { useEffect, useRef, useState } from "react";
 import UserForm from "../../features/Users/UserForm";
 import StudentForm from "../../features/Students/StudentForm";
-import ControllerForm from "./ControllerForm";
+import StdaddmisForm from "../collegeStudent/StdaddmisForm";
 import Login from "../../features/auth/Login";
 
 function Form() {
@@ -164,7 +164,7 @@ function Form() {
       <div className="form-box"><UserForm /></div>
       <div className="form-box"><StudentForm /></div>
       <div className="form-box"><Login /></div>
-      <div className="form-box"><ControllerForm /></div>
+      <div className="form-box"><StdaddmisForm /></div>
     </div>
 
     </>

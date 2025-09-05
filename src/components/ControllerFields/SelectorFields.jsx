@@ -18,7 +18,7 @@ function SelectorFields({ name, control, defaultValue, label, value = [] }) {
                         <Box sx={{ mt: 1 }} >
                             <FormControl fullWidth>
 
-                                <InputLabel id="demo-select-small-label">Courses</InputLabel>
+                                <InputLabel id="demo-select-small-label">{label}</InputLabel>
 
                                 <Select {...field}
                                     labelId="demo-select-small-label"
