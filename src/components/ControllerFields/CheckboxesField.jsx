@@ -5,7 +5,8 @@ import {
   FormLabel,
   FormGroup,
   FormControlLabel,
-  Checkbox, FormHelperText
+  Checkbox,
+  FormHelperText,
 } from "@mui/material";
 
 function CheckboxesField({ name, control, defaultValue, options = [], label }) {
@@ -15,7 +16,7 @@ function CheckboxesField({ name, control, defaultValue, options = [], label }) {
       control={control}
       defaultValue={defaultValue || []}
       render={({ field, fieldState: { error } }) => (
-        <FormControl component="fieldset" margin="normal" >
+        <FormControl component="fieldset" margin="normal">
           {label && <FormLabel component="legend">{label}</FormLabel>}
           <FormGroup sx={{ flexDirection: "row" }}>
             {options.map((option, index) => (
@@ -39,7 +40,9 @@ function CheckboxesField({ name, control, defaultValue, options = [], label }) {
             ))}
           </FormGroup>
           {error && (
-            <FormHelperText style={{ fontSize: "15px", color: "#d32f2f" }}>{error.message}</FormHelperText>
+            <FormHelperText style={{ fontSize: "15px", color: "#d32f2f" }}>
+              {error.message}
+            </FormHelperText>
           )}
         </FormControl>
       )}

@@ -16,7 +16,7 @@ function InputField({
         {/* {label && <label htmlFor={name}>{label}</label>} */}
 
         <Controller
-                                          name={name}
+          name={name}
           control={control}
           defaultValue={defaultValue}
           // rules={rules}
@@ -41,7 +41,6 @@ function InputField({
                 margin="dense"
               />
               <br />
-
               {error && (
                 <FormHelperText style={{ fontSize: "15px", color: "#d32f2f" }}>
                   {error.message}

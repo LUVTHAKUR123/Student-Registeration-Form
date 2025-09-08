@@ -9,7 +9,8 @@ import * as yup from "yup";
 import RadioButton from "../ControllerFields/RadioButton";
 import TextAreaField from "../ControllerFields/TextAreaField";
 import { Box, Button, Paper } from "@mui/material";
-
+import { successToast, errorToast } from "../../toastUtlis";
+import "react-toastify/dist/ReactToastify.css";
 function StdaddmisForm({
   onClose,
   editID,
@@ -51,16 +52,36 @@ function StdaddmisForm({
   });
 
   //===========USEFORM =====
-  const { handleSubmit, control, reset } = useForm({
+  const {
+    handleSubmit,
+    control,
+    reset,
+    // formState: { errors },
+  } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: selectedUser || initialValues,
   });
+
+  //TOAST ERROR MESSAGE
+  const validationToastMsg = (errors) => {
+    const messages = Object.values(errors).map((err) => err.message);
+    if (messages.length) {
+      errorToast(
+        <ul>
+          {messages.map((msg, index) => (
+            <li key={index}>{msg}</li>
+          ))}
+        </ul>
+      );
+    }
+  };
 
   // ========================
   useEffect(() => {
     if (selectedUser) {
       reset(selectedUser);
-    } else {
+      `
+    } else {`;
       reset(initialValues);
     }
   }, [selectedUser, reset]);
@@ -73,8 +94,8 @@ function StdaddmisForm({
       setEditID(null);
       onClose();
     } else {
-      // Add case
       onResponse({ ...formData, id: uuidv4() }, null);
+      successToast("New student account has been created.");
     }
 
     reset(initialValues);
@@ -83,120 +104,120 @@ function StdaddmisForm({
 
   return (
     <>
-      <Paper sx={{ p: 3, maxWidth: 500, mx: "auto" }}>
-        <div className="modal-overlay" onClick={onClose}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-              <h1>Student Registration Form</h1>
+      {/* <Paper sx={{ p: 3, maxWidth: 500, mx: "auto" }}> */}
+      {/* <div className="modal-overlay" onClick={onClose}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}> */}
+      <form onSubmit={handleSubmit(onSubmit, validationToastMsg)}>
+        <h1>Student Registration Form</h1>
 
-              {/* ROLL NO FIELD */}
-              <InputField
-                label="Roll No:"
-                name="rollno"
-                control={control}
-                placeholder="Enter the roll no"
-                type="number"
-              />
+        {/* ROLL NO FIELD */}
+        <InputField
+          label="Roll No:"
+          name="rollno"
+          control={control}
+          placeholder="Enter the roll no"
+          type="number"
+        />
 
-              {/* NAME FIELD*/}
-              <InputField
-                name="name"
-                control={control}
-                placeholder="Enter the name"
-                label="Name:"
-                type="text"
-              />
+        {/* NAME FIELD*/}
+        <InputField
+          name="name"
+          control={control}
+          placeholder="Enter the name"
+          label="Name:"
+          type="text"
+        />
 
-              {/* DATE FIELD */}
-              <InputField
-                label="DOB :"
-                name="DOB"
-                placeholder="Enter the DOB"
-                control={control}
-                type="date"
-              />
+        {/* DATE FIELD */}
+        <InputField
+          label="DOB :"
+          name="DOB"
+          placeholder="Enter the DOB"
+          control={control}
+          type="date"
+        />
 
-              {/* CONTACT */}
-              <InputField
-                label="Mobile No : "
-                name="contact"
-                control={control}
-                placeholder="Enter the number"
-                type="tel"
-              />
+        {/* CONTACT */}
+        <InputField
+          label="Mobile No : "
+          name="contact"
+          control={control}
+          placeholder="Enter the number"
+          type="tel"
+        />
 
-              {/* EMAIL */}
-              <InputField
-                name="email"
-                label="Email :"
-                control={control}
-                placeholder="Enter the email "
-                type="email"
-              />
+        {/* EMAIL */}
+        <InputField
+          name="email"
+          label="Email :"
+          control={control}
+          placeholder="Enter the email "
+          type="email"
+        />
 
-              {/* RADIO BUTTON FOR GENDER */}
-              <RadioButton
-                label="Gender :"
-                name="gender"
-                control={control}
-                gender={["Male", "Female"]}
-              />
+        {/* RADIO BUTTON FOR GENDER */}
+        <RadioButton
+          label="Gender :"
+          name="gender"
+          control={control}
+          gender={["Male", "Female"]}
+        />
 
-              {/* SELECTION FOR THE COURSES */}
-              <SelectorFields
-                name="courses"
-                control={control}
-                label="Courses"
-                value={["bba", "bca"]}
-              />
+        {/* SELECTION FOR THE COURSES */}
+        <SelectorFields
+          name="courses"
+          control={control}
+          label="Courses"
+          value={["BBA", "BCA", "MCA", "B.Sc", "B.Tech", "B.Com"]}
+        />
 
-              {/* CHECKBOX FOR DEPARTMENT */}
-              <CheckboxesField
-                label="Department :"
-                name="Department"
-                control={control}
-                options={["CSE", "IT", "ECE", "Civil", "Mech"]}
-              />
+        {/* CHECKBOX FOR DEPARTMENT */}
+        <CheckboxesField
+          label="Department :"
+          name="Department"
+          control={control}
+          options={["CSE", "IT", "ECE", "Civil", "Law", "Science"]}
+        />
 
-              {/* DESCRIPTION */}
-              <TextAreaField
-                label="Description :"
-                name="description"
-                control={control}
-                placeholder="Write something about yourself..."
-                rows="2"
-              />
+        {/* DESCRIPTION */}
+        <TextAreaField
+          label="Description :"
+          name="description"
+          control={control}
+          placeholder="Write something about yourself..."
+          rows="2"
+        />
 
-              {/* ADDRESS */}
-              <TextAreaField
-                label="Address :"
-                name="address"
-                control={control}
-                placeholder="Enter the address"
-                rows="2"
-              />
+        {/* ADDRESS */}
+        <TextAreaField
+          label="Address :"
+          name="address"
+          control={control}
+          placeholder="Enter the address"
+          rows="2"
+        />
 
-              {/* ======SUBMIT BUTTON =========== */}
-              <Button
-                variant="contained"
-                sx={{ borderRadius: "20px", padding: "10px" }}
-                type="submit"
-              >
-                {editID ? "Update" : "Submit"}
-              </Button>
-            </Box>
+        {/* ======SUBMIT BUTTON =========== */}
+        <Button
+          variant="contained"
+          sx={{ borderRadius: "20px", padding: "10px" }}
+          type="submit"
+        >
+          {editID ? "Update" : "Submit"}
+        </Button>
+      </form>
 
-            <Button
-              variant="contained"
-              color="error"
-              sx={{ margin: "25px" }}
-              onClick={onClose}
-            >
-              Close
-            </Button>
-          </div>
-        </div>
-      </Paper>
+      {/* <Button
+        variant="contained"
+        color="error"
+        sx={{ margin: "25px" }}
+        onClick={onClose}
+      >
+        Close
+      </Button> */}
+      {/* </div>
+        </div> */}
+      {/* </Paper> */}
     </>
   );
 }
